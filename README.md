@@ -73,6 +73,11 @@ npm run build  # production build (fully static pages)
   multi-tenant SaaS, MVP).
 - Static generation (SSG) for both pages → fast TTFB and Core Web Vitals;
   zero client-side JS required for any content.
+- `sitemap.xml` entries carry `lastModified` (build time).
+- Security headers (HSTS, nosniff, frame denial, referrer/permissions policy,
+  CSP in report-only) from `next.config.ts`.
+- `www.vanguarddevs.com` 301s to the apex at Cloudflare (Redirect Rule); the
+  apex DNS record stays DNS-only so Vercel issues the certificate.
 
 ## Post-launch (manual steps)
 

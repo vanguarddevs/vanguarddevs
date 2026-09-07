@@ -57,6 +57,7 @@ export default function Contact({
           href={href}
           target="_blank"
           rel="noopener"
+          data-track="contact_cta"
         >
           <SectionBlur>
             {booking ? dict.contact.bookingCta : dict.contact.cta}
@@ -66,11 +67,11 @@ export default function Contact({
       </p>
       <div className="row">
         {booking && (
-          <a className="btn" href={WHATSAPP_URL} target="_blank" rel="noopener">
+          <a className="btn" href={WHATSAPP_URL} target="_blank" rel="noopener" data-track="contact_whatsapp">
             {dict.contact.cta}
           </a>
         )}
-        <a className="btn" href={`mailto:${CONTACT_EMAIL}`}>
+        <a className="btn" href={`mailto:${CONTACT_EMAIL}`} data-track="contact_email">
           {CONTACT_EMAIL}
         </a>
         <a
@@ -79,6 +80,7 @@ export default function Contact({
           target="_blank"
           rel="me noopener noreferrer"
           aria-label={dict.contact.socialLinkedin}
+          data-track="contact_linkedin"
         >
           <LinkedInIcon aria-hidden="true" />
         </a>
@@ -88,6 +90,7 @@ export default function Contact({
           target="_blank"
           rel="me noopener noreferrer"
           aria-label={dict.contact.socialInstagram}
+          data-track="contact_instagram"
         >
           <InstagramIcon aria-hidden="true" />
         </a>

@@ -51,11 +51,11 @@ export default function Hero({
         <div>
           <p>{dict.hero.sub}</p>
           <div className="hero-ctas">
-            <a className="btn solid" href={cta.href} target="_blank" rel="noopener">
+            <a className="btn solid" href={cta.href} target="_blank" rel="noopener" data-track="hero_cta">
               <span className="mark" aria-hidden="true" />
               {cta.booking ? dict.contact.bookingCta : dict.hero.ctaPrimary}
             </a>
-            <a className="btn" href="#cases">
+            <a className="btn" href="#cases" data-track="hero_cases">
               {dict.hero.ctaSecondary}
             </a>
           </div>

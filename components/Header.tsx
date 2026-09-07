@@ -43,14 +43,14 @@ export default function Header({
                 {label}
               </a>
             ))}
-            <a className="cta" href={cta.href} target="_blank" rel="noopener">
+            <a className="cta" href={cta.href} target="_blank" rel="noopener" data-track="header_menu_cta">
               {cta.booking ? dict.contact.bookingCta : dict.nav.cta}
             </a>
             <div className="lang-toggle" role="group" aria-label={dict.nav.ariaLang}>
-              <Link href="/es" aria-current={lang === "es" ? "true" : undefined} hrefLang="es">
+              <Link href="/es" aria-current={lang === "es" ? "true" : undefined} hrefLang="es" data-track="lang_es">
                 ES
               </Link>
-              <Link href="/en" aria-current={lang === "en" ? "true" : undefined} hrefLang="en">
+              <Link href="/en" aria-current={lang === "en" ? "true" : undefined} hrefLang="en" data-track="lang_en">
                 EN
               </Link>
             </div>
@@ -58,14 +58,14 @@ export default function Header({
         </details>
       </nav>
       <div className="header-actions">
-        <a className="cta" href={cta.href} target="_blank" rel="noopener">
+        <a className="cta" href={cta.href} target="_blank" rel="noopener" data-track="header_cta">
           {cta.booking ? dict.contact.bookingCta : dict.nav.cta}
         </a>
         <div className="lang-toggle" role="group" aria-label={dict.nav.ariaLang}>
-          <Link href="/es" aria-current={lang === "es" ? "true" : undefined} hrefLang="es">
+          <Link href="/es" aria-current={lang === "es" ? "true" : undefined} hrefLang="es" data-track="lang_es">
             ES
           </Link>
-          <Link href="/en" aria-current={lang === "en" ? "true" : undefined} hrefLang="en">
+          <Link href="/en" aria-current={lang === "en" ? "true" : undefined} hrefLang="en" data-track="lang_en">
             EN
           </Link>
         </div>

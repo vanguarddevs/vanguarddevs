@@ -22,7 +22,7 @@ export default function Services({ dict }: { dict: Dictionary }) {
         <span className="mono">{dict.services.packagesIntro}</span>
         <p className="venezuela-note">
           {dict.services.venezuelaIntro}{" "}
-          <a href="#contact" className="venezuela-cta">
+          <a href="#contact" className="venezuela-cta" data-track="venezuela_note">
             {dict.services.venezuelaCta}
           </a>
         </p>

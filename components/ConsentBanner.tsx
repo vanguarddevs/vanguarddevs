@@ -10,6 +10,7 @@ import Link from "next/link";
 import Script from "next/script";
 import { useEffect, useId, useState } from "react";
 import CookieIcon from "@/components/icons/CookieIcon";
+import { trackEvent } from "@/lib/analytics";
 import type { Locale } from "@/lib/i18n";
 
 const CONSENT_COOKIE = "vg_consent";
@@ -22,7 +23,10 @@ const CONSENT_MAX_AGE = 60 * 60 * 24 * 180; // ~180 days
 export const CONSENT_REOPEN_EVENT = "vg:reopen-consent-banner";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
-const GA_ENABLED =
+// Exported so CookieSettingsButton can hide itself when there is nothing to
+// consent to. Inlined at build time: setting the var in Vercel without a
+// fresh production build leaves this false.
+export const GA_ENABLED =
   process.env.NODE_ENV === "production" &&
   Boolean(GA_ID) &&
   GA_ID !== "PLACEHOLDER";
@@ -81,6 +85,21 @@ export default function ConsentBanner({
     return () => window.removeEventListener(CONSENT_REOPEN_EVENT, reopen);
   }, []);
 
+  // CTA click tracking, delegated from the document so the server-rendered
+  // sections (Header/Hero/Contact/Services) stay free of client JS: any
+  // <a> or <button> carrying data-track="name" reports a cta_click. No-op
+  // until gtag is mounted (see lib/analytics.ts).
+  useEffect(() => {
+    if (!GA_ENABLED) return;
+    function onClick(event: MouseEvent) {
+      const target = (event.target as Element | null)?.closest<HTMLElement>("[data-track]");
+      if (!target?.dataset.track) return;
+      trackEvent("cta_click", { cta: target.dataset.track, lang });
+    }
+    document.addEventListener("click", onClick, { capture: true });
+    return () => document.removeEventListener("click", onClick, { capture: true });
+  }, [lang]);
+
   function handleAccept() {
     writeCookie(CONSENT_COOKIE, "granted");
     setGranted(true);
@@ -93,9 +112,14 @@ export default function ConsentBanner({
     setVisible(false);
   }
 
+  // No analytics configured = no cookie will ever be set = nothing to ask
+  // consent for. Rendering the banner anyway was a prompt about nothing that
+  // also sat on top of the hero CTAs.
+  if (!GA_ENABLED) return null;
+
   return (
     <>
-      {GA_ENABLED && granted && (
+      {granted && (
         <>
           <Script
             src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}

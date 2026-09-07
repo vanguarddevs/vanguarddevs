@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import type { Dictionary } from "@/lib/dictionaries";
 import type { Locale } from "@/lib/i18n";
 import { WHATSAPP_URL } from "@/lib/site";
+import { trackEvent } from "@/lib/analytics";
 import "./chat-widget.css";
 
 type Message = { role: "user" | "assistant"; content: string };
@@ -140,7 +141,7 @@ export default function ChatWidget({
             </form>
             <p>
               {dict.disclaimer}{" "}
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" data-track="chat_talk_to_human">
                 {dict.talkToHuman}
               </a>
             </p>
@@ -151,7 +152,12 @@ export default function ChatWidget({
       <button
         type="button"
         className="chat-fab"
-        onClick={() => setOpen((v) => !v)}
+        onClick={() =>
+          setOpen((v) => {
+            if (!v) trackEvent("chat_open", { lang });
+            return !v;
+          })
+        }
         aria-expanded={open}
         aria-label={open ? dict.close : dict.open}
       >
