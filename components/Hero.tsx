@@ -59,6 +59,7 @@ export default function Hero({
               {dict.hero.ctaSecondary}
             </a>
           </div>
+          <span className="mono hero-trust">{dict.hero.trustLine}</span>
         </div>
         <div className="hero-scroll" aria-hidden="true">
           <svg

@@ -16,7 +16,7 @@ export default function Footer({
       <span className="mono">
         © {new Date().getFullYear()} <Link href={`/${lang}`}>VanguardDevs</Link> ·{" "}
         <a href={JODAZ_URL} target="_blank" rel="noopener">
-          JODAZ
+          {dict.footer.founderLink}
         </a>
       </span>
       <span className="mono footer-links">

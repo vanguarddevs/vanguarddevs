@@ -518,6 +518,13 @@ h1 .line-word {
   margin-top: 28px;
 }
 
+/* trust line under the CTAs: quiet mono, same muted paper as .hero-foot .mono */
+.hero-trust {
+  display: block;
+  margin-top: 22px;
+  color: rgba(236, 234, 241, 0.55);
+}
+
 /* ---------- content reveal ----------
    Cards, steps and notes fade/slide in as they enter the viewport (the same
    move as the personal site's AnimatedContent: +48px → 0, opacity 0 → 1,

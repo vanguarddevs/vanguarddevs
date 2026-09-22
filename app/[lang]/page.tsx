@@ -8,7 +8,16 @@ import Process from "@/components/Process";
 import Services from "@/components/Services";
 import { getDictionary } from "@/lib/dictionaries";
 import { siteUrl, type Locale } from "@/lib/i18n";
-import { CONTACT_EMAIL, INSTAGRAM_URL, LINKEDIN_URL } from "@/lib/site";
+import {
+  CONTACT_EMAIL,
+  INSTAGRAM_URL,
+  JODAZ_URL,
+  LINKEDIN_URL,
+  WHATSAPP_URL,
+} from "@/lib/site";
+
+// wa.me/<digits> → E.164 for schema.org telephone/contactPoint.
+const WHATSAPP_E164 = `+${WHATSAPP_URL.replace(/^https:\/\/wa\.me\//, "")}`;
 
 function jsonLd(lang: Locale) {
   const dict = getDictionary(lang);
@@ -20,14 +29,33 @@ function jsonLd(lang: Locale) {
         "@id": `${siteUrl}/#organization`,
         name: "VanguardDevs",
         url: siteUrl,
+        // The generated OG image lives at a hashed /[lang]/opengraph-image/0
+        // URL, so the static manifest icon is the stable choice for both.
+        logo: `${siteUrl}/web-app-manifest-512x512.png`,
+        image: `${siteUrl}/web-app-manifest-512x512.png`,
         email: CONTACT_EMAIL,
-        description: dict.meta.description,
-        sameAs: [INSTAGRAM_URL, LINKEDIN_URL],
-        founder: {
-          "@type": "Person",
-          name: "Jesus O.",
-          sameAs: [LINKEDIN_URL],
+        telephone: WHATSAPP_E164,
+        contactPoint: {
+          "@type": "ContactPoint",
+          contactType: "sales",
+          email: CONTACT_EMAIL,
+          telephone: WHATSAPP_E164,
+          availableLanguage: ["es", "en"],
         },
+        description: dict.meta.description,
+        slogan: `${dict.hero.headlineStart} ${dict.hero.headlineAccent}`,
+        sameAs: [INSTAGRAM_URL, LINKEDIN_URL],
+        knowsAbout: [
+          "MVP development",
+          "Multi-tenant SaaS",
+          "Fintech",
+          "Insurtech",
+          "Ecommerce",
+          "Embedded infrastructure",
+          "Partner APIs",
+        ],
+        founder: { "@id": `${siteUrl}/#founder` },
+        employee: { "@id": `${siteUrl}/#founder` },
         areaServed: [
           { "@type": "Country", name: "United States" },
           { "@type": "Country", name: "United Kingdom" },
@@ -41,6 +69,16 @@ function jsonLd(lang: Locale) {
             name: pkg.title,
           },
         })),
+      },
+      {
+        "@type": "Person",
+        "@id": `${siteUrl}/#founder`,
+        name: "Jesus O.",
+        jobTitle: dict.about.photoLabel,
+        description: dict.about.bio,
+        url: JODAZ_URL,
+        sameAs: [LINKEDIN_URL, JODAZ_URL],
+        worksFor: { "@id": `${siteUrl}/#organization` },
       },
       {
         "@type": "WebSite",
@@ -81,7 +119,7 @@ export default async function Page({
       <Header dict={dict} lang={lang} />
       <main>
         <Hero dict={dict} lang={lang} />
-        <Services dict={dict} />
+        <Services dict={dict} lang={lang} />
         <Cases dict={dict} />
         <Process dict={dict} />
         <Contact dict={dict} lang={lang} />

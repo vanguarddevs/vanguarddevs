@@ -45,6 +45,8 @@ export interface Dictionary {
     headlineStart: string;
     headlineAccent: string;
     sub: string;
+    /** Mono trust line under the CTAs. Only facts already stated in about.bio. */
+    trustLine: string;
     ctaPrimary: string;
     ctaSecondary: string;
   };
@@ -69,8 +71,8 @@ export interface Dictionary {
     venezuelaCta: string;
     packages: PackageItem[];
   };
-  /* Not rendered on any page — feeds only the chat system prompt
-     (lib/chat-prompt.ts), so the assistant can talk about the founder. */
+  /* Not rendered as a section (the founder section was removed 2026-09);
+     feeds the chat system prompt (lib/chat-prompt.ts) and the Person JSON-LD. */
   about: {
     photoLabel: string;
     bio: string;
@@ -86,6 +88,8 @@ export interface Dictionary {
     socialInstagram: string;
   };
   footer: {
+    /** Label for the JODAZ_URL link — the founder's real name, per the copy rules. */
+    founderLink: string;
     privacyLink: string;
     cookieSettings: string;
   };
@@ -130,10 +134,10 @@ export interface Dictionary {
 
 const es: Dictionary = {
   meta: {
-    title: "VanguardDevs — Estudio de producto: MVPs, SaaS y ecommerce",
+    title: "Desarrollo de MVPs, SaaS y producto fintech | VanguardDevs",
     description:
       "Estudio de producto para fintech, insurtech y ecommerce: MVPs, SaaS, tiendas online, landing pages e infraestructura embebida. En semanas, no meses. USA, UK y LATAM.",
-    ogAlt: "VanguardDevs — Estudio de producto: MVPs, SaaS y ecommerce",
+    ogAlt: "VanguardDevs — Desarrollo de MVPs, SaaS y producto fintech",
   },
   nav: {
     cases: "Proyectos",
@@ -149,7 +153,8 @@ const es: Dictionary = {
     ariaLabel: "Introducción",
     headlineStart: "Productos donde el dinero tiene que cuadrar,",
     headlineAccent: "lanzados en semanas.",
-    sub: "En VanguardDevs, la experiencia en tecnología se pone al servicio de flujos de trabajo más eficientes y rentables, en fintech, insurtech y ecommerce.",
+    sub: "MVPs, SaaS multi-tenant e infraestructura fintech embebida para startups en USA, UK y LATAM — alcance fijo, lanzado en 4-6 semanas.",
+    trustLine: "8 años full-stack · fintech, insurtech y ecommerce · USA, UK y LATAM",
     ctaPrimary: "Empieza ahora",
     ctaSecondary: "Ver proyectos",
   },
@@ -199,10 +204,8 @@ const es: Dictionary = {
         name: "Insurtech",
         body: "Plataforma de retención embebida dentro de los portales de aseguradoras del Reino Unido.",
       },
-      {
-        name: "Ecommerce",
-        body: "[PLACEHOLDER]",
-      },
+      // Ecommerce dropped until there is a real project to describe — the
+      // section never ships a [PLACEHOLDER] card.
     ],
   },
   process: {
@@ -263,6 +266,7 @@ const es: Dictionary = {
     socialInstagram: "Instagram",
   },
   footer: {
+    founderLink: "Jesus O.",
     privacyLink: "Privacidad",
     cookieSettings: "Cookies",
   },
@@ -346,10 +350,10 @@ const es: Dictionary = {
 
 const en: Dictionary = {
   meta: {
-    title: "VanguardDevs — Product studio: MVPs, SaaS & ecommerce",
+    title: "MVP, SaaS & fintech product development studio | VanguardDevs",
     description:
       "Product studio for fintech, insurtech and ecommerce: MVPs, SaaS, online stores, landing pages and embedded infrastructure. Shipped in weeks, not months. USA, UK and LATAM.",
-    ogAlt: "VanguardDevs — Product studio: MVPs, SaaS & ecommerce",
+    ogAlt: "VanguardDevs — MVP, SaaS & fintech product development studio",
   },
   nav: {
     cases: "Projects",
@@ -365,7 +369,8 @@ const en: Dictionary = {
     ariaLabel: "Intro",
     headlineStart: "Products where the money has to balance,",
     headlineAccent: "shipped in weeks.",
-    sub: "At VanguardDevs, engineering experience is put to work on more efficient, more profitable workflows — in fintech, insurtech and ecommerce.",
+    sub: "MVPs, multi-tenant SaaS and embedded fintech infrastructure for startups in the US, UK and LATAM — fixed scope, shipped in 4-6 weeks.",
+    trustLine: "8 years full-stack · fintech, insurtech & ecommerce · USA, UK & LATAM",
     ctaPrimary: "Start now",
     ctaSecondary: "See projects",
   },
@@ -415,10 +420,8 @@ const en: Dictionary = {
         name: "Insurtech",
         body: "A retention platform embedded inside UK insurer portals.",
       },
-      {
-        name: "Ecommerce",
-        body: "[PLACEHOLDER]",
-      },
+      // Ecommerce dropped until there is a real project to describe — the
+      // section never ships a [PLACEHOLDER] card.
     ],
   },
   process: {
@@ -479,6 +482,7 @@ const en: Dictionary = {
     socialInstagram: "Instagram",
   },
   footer: {
+    founderLink: "Jesus O.",
     privacyLink: "Privacy",
     cookieSettings: "Cookies",
   },
