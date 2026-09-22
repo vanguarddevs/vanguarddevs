@@ -55,7 +55,7 @@ Delegate recurring work to these instead of doing it inline:
 
 ## Copy rules (owner requirements — do not violate)
 
-- The owner supplies copy verbatim; use it literally, never rewrite it. Mark missing content with `[PLACEHOLDER]`. **Never invent a price, metric, client name or date** — an unsupplied number ships as `$[PLACEHOLDER]`, not as a plausible guess. Case studies follow a uniform *problema → decisiones técnicas → resultado* shape inside the single `body` string; keep them tight (roughly 40–65 words) and let the technical-decisions sentence carry the senior-judgment proof (RLS tenant isolation, the atomic slot reservation closing the checkout race, the append-only rate log).
+- The owner supplies copy verbatim; use it literally, never rewrite it. Mark missing content with `[PLACEHOLDER]`. **Never invent a price, metric, client name or date** — an unsupplied number ships as `$[PLACEHOLDER]`, not as a plausible guess. Case study `body` strings are plain-language descriptions of the problem and what the product does — the owner removed the technical explanations (2026-09); don't reintroduce implementation detail there.
 - Voice is **fully impersonal**: no first person anywhere — neither "yo/I" nor "nosotros/we". VanguardDevs or the product is the subject. Second person addressing the visitor is fine.
 - Use the founder's real name in display copy: **"Jesus O."**. The nickname "Jodaz" is never a *name* in visible copy, but the owner explicitly chose it for `JODAZ_URL` (`jodaz.vanguarddevs.com`, linked from the footer) — that's correct as-is.
 - The hero must not contain "Fundado por…"/"Founded by…". The founder introduction lives only in `about.bio` / `about.photoLabel`, which feed the chat prompt — edit it in one place there.
